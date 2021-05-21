@@ -11,7 +11,7 @@ public class TechnicDto {
 
     private String name;
 
-    private Long typeId;
+    private TypeDto type;
 
     private Long modelId;
 

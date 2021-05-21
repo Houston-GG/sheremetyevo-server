@@ -17,8 +17,9 @@ public class Technic {
     @Column(name="NAME", nullable = false)
     private String name;
 
-    @Column(name="TYPE_ID", nullable = false)
-    private Long typeId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="TYPE_ID", nullable=false)
+    private Type type;
 
     @Column(name="MODEL_ID", nullable = false)
     private Long modelId;
