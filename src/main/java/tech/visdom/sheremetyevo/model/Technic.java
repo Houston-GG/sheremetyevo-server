@@ -21,8 +21,9 @@ public class Technic {
     @JoinColumn(name="TYPE_ID", nullable=false)
     private Type type;
 
-    @Column(name="MODEL_ID", nullable = false)
-    private Long modelId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="MODEL_ID", nullable = false)
+    private Model model;
 
     @Column(name="CURRENT_FUEL_RESERVE", nullable = false)
     private Float currentFuelReserve;

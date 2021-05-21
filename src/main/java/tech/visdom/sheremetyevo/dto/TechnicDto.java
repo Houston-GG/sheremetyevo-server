@@ -13,7 +13,7 @@ public class TechnicDto {
 
     private TypeDto type;
 
-    private Long modelId;
+    private ModelDto model;
 
     private Float currentFuelReserve;
 
