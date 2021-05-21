@@ -19,7 +19,7 @@ public class TechnicDto {
 
     private Float currentReagentReserve;
 
-    private Long statusId;
+    private TechnicStatusDto status;
 
     private Float latitude;
 

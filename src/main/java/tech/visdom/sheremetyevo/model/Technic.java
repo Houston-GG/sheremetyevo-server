@@ -31,8 +31,9 @@ public class Technic {
     @Column(name="CURRENT_REAGENT_RESERVE", nullable = false)
     private Float currentReagentReserve;
 
-    @Column(name="STATUS_ID", nullable = false)
-    private Long statusId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name="STATUS_ID", nullable=false)
+    private TechnicStatus status;
 
     @Column(name="LATITUDE", nullable = false)
     private Float latitude;
