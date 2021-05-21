@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sheremetyevo-server
+spec:
+  selector:
+    matchLabels:
+      app: sheremetyevo-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sheremetyevo-server
+    spec:
+      containers:
+      - image: sheremetyevo_server:dev
+        name: sheremetyevo-server
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: sheremetyevo
+        resources:
+          requests:
+            cpu: 200m
+            memory: 300M
+          limits:
+            cpu: 600m
+            memory: 500M
+        env:
+          - name: SHEREMETYEVO_DATASOURCE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: sheremetyevo-server-secrets
+                key: datasource.username
+          - name: SHEREMETYEVO_DATASOURCE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sheremetyevo-server-secrets
+                key: datasource.password
+          - name: MYSQL_DATASOURCE_URL
+            valueFrom:
+              secretKeyRef:
+                name: musql-server-url-secret
+                key: spring.datasource.url
