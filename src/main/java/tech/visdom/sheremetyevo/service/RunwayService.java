@@ -11,6 +11,8 @@ import tech.visdom.sheremetyevo.dto.RunwayUnitReport;
 import tech.visdom.sheremetyevo.dto.TechnicDto;
 import tech.visdom.sheremetyevo.exception.RunwayUnitNotFoundException;
 import tech.visdom.sheremetyevo.model.Runway;
+import tech.visdom.sheremetyevo.model.RunwayUnit;
+import tech.visdom.sheremetyevo.model.Technic;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class RunwayService {
     }
 
     public Map<TechnicDto, Long> getBestTechnicsFor(Long id) {
-        runwayDao.findById(id).orElseThrow(() -> new RunwayUnitNotFoundException(id));
+        RunwayUnit unit = runwayUnitDao.findById(id).orElseThrow(() -> new RunwayUnitNotFoundException(id));
 
         Runway firstRunway = getAllRunwaysEntities().get(0);
         List<List<Long>> graph = firstRunway.getUnits().stream().map(runwayUnit -> {
@@ -79,7 +81,9 @@ public class RunwayService {
                     dist.set(nv,Math.min(dist.get(nv), dist.get(v) + graph.get(v).get(nv))); // улучшаем оценку расстояния (релаксация)
         }
 
-        List<TechnicDto> technicsDto = technicService.getAllTechnicsDto();
+        Long typeId = unit.getIcing() > 0 ? 1L : 2L;
+
+        List<TechnicDto> technicsDto = technicService.getAllFreeTechnicsDtoByType(typeId);
 
         return technicsDto
                 .stream()

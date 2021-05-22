@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import tech.visdom.sheremetyevo.dao.TechnicDao;
 import tech.visdom.sheremetyevo.dto.TechnicDto;
 import tech.visdom.sheremetyevo.model.Technic;
+import tech.visdom.sheremetyevo.model.Type;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +30,14 @@ public class TechnicService {
 
     public List<TechnicDto> getAllTechnicsDto() {
         return getAllTechnicsEntities()
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<TechnicDto> getAllFreeTechnicsDtoByType(Long typeId) {
+        return IterableUtils
+                .toList(technicDao.findAllByStatusIdAndTypeId(1L, typeId))
                 .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
