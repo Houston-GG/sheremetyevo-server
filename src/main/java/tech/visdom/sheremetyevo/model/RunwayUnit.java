@@ -1,10 +1,12 @@
 package tech.visdom.sheremetyevo.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "runway_unit")
@@ -40,4 +42,8 @@ public class RunwayUnit {
             inverseJoinColumns = @JoinColumn(name = "SERVICE_POINT_ID", referencedColumnName = "ID")
     )
     private List<ServicePoint> servicePoints;
+
+    public RunwayUnit(Long id) {
+        this.id = id;
+    }
 }

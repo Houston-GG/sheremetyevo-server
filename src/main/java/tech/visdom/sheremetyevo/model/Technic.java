@@ -1,10 +1,12 @@
 package tech.visdom.sheremetyevo.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "technic")
@@ -43,4 +45,8 @@ public class Technic {
 
     @Column(name="LAST_UPDATE", nullable = false)
     private LocalDateTime lastUpdate;
+
+    public Technic(Long id) {
+        this.id = id;
+    }
 }

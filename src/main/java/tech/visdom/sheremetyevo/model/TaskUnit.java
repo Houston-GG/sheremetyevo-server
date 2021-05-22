@@ -1,9 +1,11 @@
 package tech.visdom.sheremetyevo.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "task_unit", uniqueConstraints = @UniqueConstraint(columnNames = {"TASK_ID", "RUNWAY_UNIT_ID", "TECHNIC_ID"}))
@@ -27,4 +29,11 @@ public class TaskUnit {
 
     @Column(name="IS_FINISHED", nullable = false)
     private boolean isFinished;
+
+    public TaskUnit(Task task, RunwayUnit runwayUnit, Technic technic, boolean isFinished) {
+        this.task = task;
+        this.runwayUnit = runwayUnit;
+        this.technic = technic;
+        this.isFinished = isFinished;
+    }
 }

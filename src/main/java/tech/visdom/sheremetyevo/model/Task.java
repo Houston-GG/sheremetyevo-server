@@ -1,11 +1,13 @@
 package tech.visdom.sheremetyevo.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "task")
@@ -31,6 +33,13 @@ public class Task {
     @Column(name="TASK_STATUS_ID", nullable = false)
     private Long taskStatusId;
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<TaskUnit> taskUnits;
+
+    public Task(LocalDateTime initTime, LocalDateTime approximateFinishTime, User operator, Long taskStatusId) {
+        this.initTime = initTime;
+        this.approximateFinishTime = approximateFinishTime;
+        this.operator = operator;
+        this.taskStatusId = taskStatusId;
+    }
 }
