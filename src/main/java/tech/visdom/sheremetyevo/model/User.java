@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @Data
@@ -44,4 +45,11 @@ public class User {
     )
     private List<Role> roles;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE ,CascadeType.PERSIST})
+    @JoinTable(
+            name = "user_technic",
+            joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TECHNIC_ID", referencedColumnName = "ID")
+    )
+    private Set<Technic> technics;
 }

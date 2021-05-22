@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.visdom.sheremetyevo.dto.NewTaskDto;
 import tech.visdom.sheremetyevo.dto.TaskDto;
+import tech.visdom.sheremetyevo.dto.TaskUnitDto;
 import tech.visdom.sheremetyevo.service.TaskService;
 import tech.visdom.sheremetyevo.service.UserService;
 
@@ -31,5 +32,10 @@ public class TaskController {
     @PostMapping(value = "/task")
     public void creatNewTask(@Valid @RequestBody List<NewTaskDto> newTaskDto) {
         taskService.createNewTask(newTaskDto, userService.getAuthorizedUserEntity());
+    }
+
+    @GetMapping("/units/{userId}")
+    public List<TaskUnitDto> getTaskUnitsDtoByUserId(@PathVariable("userId") Long userId) {
+        return taskService.getAllTaskUnitsByUserId(userId);
     }
 }
