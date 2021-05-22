@@ -26,4 +26,6 @@ public class TechnicDto {
     private Float longitude;
 
     private LocalDateTime lastUpdate;
+
+    private RunwayUnitDto runwayUnit;
 }

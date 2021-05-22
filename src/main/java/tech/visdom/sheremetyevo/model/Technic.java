@@ -27,6 +27,10 @@ public class Technic {
     @JoinColumn(name="MODEL_ID", nullable = false)
     private Model model;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "RUNWAY_UNIT", nullable = false)
+    private RunwayUnit runwayUnit;
+
     @Column(name="CURRENT_FUEL_RESERVE", nullable = false)
     private Float currentFuelReserve;
 

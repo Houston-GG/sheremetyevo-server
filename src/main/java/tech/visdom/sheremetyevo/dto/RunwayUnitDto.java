@@ -20,6 +20,4 @@ public class RunwayUnitDto {
     private Integer snowLevel;
 
     private List<ServicePointDto> servicePoints;
-
-    private List<RunwayUnitDto> childs;
 }
