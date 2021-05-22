@@ -43,6 +43,14 @@ public class RunwayUnit {
     )
     private List<ServicePoint> servicePoints;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "runway_unit_neighbor",
+            joinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "child_id", referencedColumnName = "ID")
+    )
+    private List<RunwayUnit> childs;
+
     public RunwayUnit(Long id) {
         this.id = id;
     }
