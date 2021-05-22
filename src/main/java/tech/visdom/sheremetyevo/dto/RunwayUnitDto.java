@@ -2,6 +2,7 @@ package tech.visdom.sheremetyevo.dto;
 
 import lombok.Data;
 
+import java.util.List;
 
 @Data
 public class RunwayUnitDto {
@@ -17,4 +18,6 @@ public class RunwayUnitDto {
     private Integer icing;
 
     private Integer snowLevel;
+
+    private List<ServicePointDto> servicePoints;
 }

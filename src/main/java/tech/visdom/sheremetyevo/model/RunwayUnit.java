@@ -3,6 +3,7 @@ package tech.visdom.sheremetyevo.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,4 +32,12 @@ public class RunwayUnit {
 
     @Column(name="SNOW_LEVEL", nullable = false)
     private Integer snowLevel;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+    @JoinTable(
+            name = "unit_service_point",
+            joinColumns = @JoinColumn(name = "RUNWAY_UNIT_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "SERVICE_POINT_ID", referencedColumnName = "ID")
+    )
+    private List<ServicePoint> servicePoints;
 }
